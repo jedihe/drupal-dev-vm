@@ -1,0 +1,8 @@
+import-sites/*.local
+import-sites/*.sql
+import-sites/*.sql.gz
+import-sites/*.log
+import-sites/*.lock
+.vagrant
+WIP/*
+*.swp
