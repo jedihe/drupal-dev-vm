@@ -12,14 +12,16 @@ class vim {
   }
 
   curl::fetch { "vim-pathogen":
-    source => "https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim",
+    source => "https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim",
     destination => "/home/vagrant/.vim/autoload/pathogen.vim",
     timeout => 30,
+    verbose => false,
     require => File['/home/vagrant/.vim/autoload'],
   }
 
   exec { "vim-plugins":
-    command => "git clone https://github.com/scrooloose/nerdtree.git &&
+    command => "rm -rf /home/vagrant/.vim/bundle/* &&
+git clone https://github.com/scrooloose/nerdtree.git &&
 git clone https://github.com/kien/ctrlp.vim.git &&
 git clone https://github.com/scrooloose/syntastic.git &&
 git clone https://github.com/Lokaltog/vim-powerline.git &&
@@ -33,6 +35,7 @@ git clone https://github.com/joonty/vdebug.git &&
 chown -R vagrant:vagrant /home/vagrant/.vim",
     logoutput => true,
     cwd => "/home/vagrant/.vim/bundle",
+    timeout => 90,
     path => ['/bin/', '/usr/bin/'],
     unless => "ls /home/vagrant/.vimrc",
     require => [File["/home/vagrant/.vim/bundle"], Curl::Fetch['vim-pathogen'], Package['git']],
