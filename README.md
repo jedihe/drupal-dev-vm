@@ -9,7 +9,7 @@
 
 (Taken almost verbatim from [FunnyMonkey/fm-vagrant](https://github.com/FunnyMonkey/fm-vagrant))
 
-Rather than propagate private keys to the virtual machine, which is a *bad* *insecure* practice, You should set up [ssh agent forwarding]https://help.github.com/articles/using-ssh-agent-forwarding instead. The vagrant box that is deployed will allow ssh key forwarding from your host OS.
+Rather than propagate private keys to the virtual machine, which is a *bad* *insecure* practice, You should set up [ssh agent forwarding](https://help.github.com/articles/using-ssh-agent-forwarding) instead. The vagrant box that is deployed will allow ssh key forwarding from your host OS.
 
 Adding the following to my .ssh/config works when ssh'ing via the port forward of 2222.
 
@@ -21,17 +21,17 @@ That is, once the above is added to your .ssh/config you should be able to ssh i
     ssh USERNAME@127.0.0.1 -p 2222
 
 
-Assuming that this did not encounter any port collisions the port will be 2222 however if there were port collisions you should see something like the following;
+Assuming that this did not encounter any port collisions the port will be 2222; however, if there were port collisions you should see something like the following;
 
     [default] Fixed port collision for 22 => 2222. Now on port 2200.
 
-Just adjust the port paramter to ssh to the corresponding replacement port, in the above case 2200.
+Just adjust the port parameter to ssh to the corresponding replacement port, in the above case 2200.
 
 
 ## Resources
-[VagrantUp]http://vagrantup.com/
+[VagrantUp](http://vagrantup.com/)
 
-[PuppetLabs]http://puppetlabs.com/
+[PuppetLabs](http://puppetlabs.com/)
 
 ## Debugging
 
@@ -65,4 +65,4 @@ headless manner.
 
 ## Disclaimer
 
-This Vagrant based VM started from [FunnyMonkey/fm-vagrant](https://github.com/FunnyMonkey/fm-vagrant), but I had to change it so much to suit my needs that I just decided to publish my modified version in a new repo. I plan on doing some cleanup later to get file names clearner (no fm\_ prefix).
+This Vagrant based VM started from [FunnyMonkey/fm-vagrant](https://github.com/FunnyMonkey/fm-vagrant), but I had to change it so much to suit my needs that I just decided to publish my modified version in a new repo. I plan on doing some cleanup later to get file names cleaner (no fm\_ prefix).
