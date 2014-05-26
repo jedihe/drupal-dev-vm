@@ -59,7 +59,9 @@ echo \"imported ${domain}.sql; remove this file to re-import.\" > /vagrant/impor
   }
 
   exec { "sync-${domain}-dir":
-    command => "sudo rsync -r --delete /vagrant/import-sites/${domain}/ ${docroot}/ && sudo chown vagrant:www-data -R * .*",
+    command => "sudo rsync -r --delete /vagrant/import-sites/${domain}/ ${docroot}/ &&
+sudo chown vagrant:vagrant -R * .* &&
+sudo chmod -R u+w * .*",
     unless => "ls ${docroot}/index.php",
     onlyif => "ls /vagrant/import-sites/${domain}/index.php",
     cwd => "${docroot}",

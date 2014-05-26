@@ -1,6 +1,10 @@
 class fm_apache_php {
   include fm_mysql
-  include apache
+
+  class {'apache':
+    user => 'vagrant',
+    group => 'www-data',
+  }
 
   class {'apache::mod::php':
     require => Package["php5"]
