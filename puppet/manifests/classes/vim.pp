@@ -43,7 +43,7 @@ chown -R vagrant:vagrant /home/vagrant/.vim",
 
   file { "vim-vimrc":
     ensure => present,
-    source => "/vagrant/import-sites/.vimrc",
+    source => "/vagrant/dotfiles/.vimrc",
     path => "/home/vagrant/.vimrc",
     mode => 644,
     owner => "vagrant",

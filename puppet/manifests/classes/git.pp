@@ -5,7 +5,7 @@ class git {
 
   file { '/home/vagrant/.gitconfig':
     ensure => 'file',
-    source => "/vagrant/import-sites/.gitconfig",
+    source => "/vagrant/dotfiles/.gitconfig",
     mode   => 664,
     owner => "vagrant",
     group => "vagrant",

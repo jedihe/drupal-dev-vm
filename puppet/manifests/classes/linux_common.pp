@@ -66,7 +66,7 @@ default_transport = error:postfix configured to not route email",
 
   file { '/home/vagrant/.zshrc':
     ensure => 'file',
-    source => "/vagrant/import-sites/.zshrc",
+    source => "/vagrant/dotfiles/.zshrc",
     mode   => 664,
     owner => "vagrant",
     group => "vagrant",
