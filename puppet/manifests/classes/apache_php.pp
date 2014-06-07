@@ -1,5 +1,5 @@
-class fm_apache_php {
-  include fm_mysql
+class apache_php {
+  include mysql
 
   class {'apache':
     user => 'vagrant',

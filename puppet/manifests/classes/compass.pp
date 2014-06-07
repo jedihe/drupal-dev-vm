@@ -1,4 +1,4 @@
-class fm_compass {
+class compass {
   package { ['ruby-compass', 'rubygems']:
     ensure => installed,
   }

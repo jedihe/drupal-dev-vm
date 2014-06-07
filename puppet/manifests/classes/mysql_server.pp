@@ -1,4 +1,4 @@
-class fm_mysql {
+class mysql_server {
   include mysql
 
   class { 'mysql::server':

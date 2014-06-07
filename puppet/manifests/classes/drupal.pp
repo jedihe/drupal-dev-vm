@@ -1,7 +1,7 @@
 class drupal {
-  include fm_mysql
-  include fm_apache_php
-  include fm_compass
+  include mysql_server
+  include apache_php
+  include compass
 
   package { 'php-console-table':
     ensure => installed,
