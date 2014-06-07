@@ -6,3 +6,4 @@ import-sites/*.lock
 .vagrant
 WIP/*
 *.swp
+*~
