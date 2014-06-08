@@ -35,7 +35,7 @@ git clone https://github.com/joonty/vdebug.git &&
 chown -R vagrant:vagrant /home/vagrant/.vim",
     logoutput => true,
     cwd => "/home/vagrant/.vim/bundle",
-    timeout => 90,
+    timeout => 180,
     path => ['/bin/', '/usr/bin/'],
     unless => "ls /home/vagrant/.vimrc",
     require => [File["/home/vagrant/.vim/bundle"], Curl::Fetch['vim-pathogen'], Package['git']],
