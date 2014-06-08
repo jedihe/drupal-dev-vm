@@ -47,10 +47,10 @@ define drupal_site(
 
     exec { "sync-${domain}-db":
       command => "mysqldump -u${db_name} -p${db_name} --no-data --add-drop-table ${db_name} | grep ^DROP | mysql -u${db_name} -p${db_name} ${db_name} &&
-zcat /vagrant/import-sites/${domain}.sql.gz | mysql -u${db_name} -p${db_name} ${db_name} &&
-echo \"imported ${domain}.sql; remove this file to re-import.\" > /vagrant/import-sites/${domain}.import.lock",
-      unless => "ls /vagrant/import-sites/${domain}.import.lock",
-      onlyif => "ls /vagrant/import-sites/${domain}.sql.gz",
+zcat /vagrant/import-sites/${domain}/${domain}.sql.gz | mysql -u${db_name} -p${db_name} ${db_name} &&
+echo \"imported ${domain}.sql.gz; remove this file to re-import.\" > /vagrant/import-sites/${domain}/${domain}.import.lock",
+      unless => "ls /vagrant/import-sites/${domain}/${domain}.import.lock",
+      onlyif => "ls /vagrant/import-sites/${domain}/${domain}.sql.gz",
       path => ['/bin/', '/usr/bin/'],
       timeout => 0, # DB dumps can take a long time to import, disable timeout.
       logoutput => true,
@@ -59,11 +59,11 @@ echo \"imported ${domain}.sql; remove this file to re-import.\" > /vagrant/impor
   }
 
   exec { "sync-${domain}-dir":
-    command => "sudo rsync -r --delete /vagrant/import-sites/${domain}/ ${docroot}/ &&
+    command => "sudo rsync -r --delete /vagrant/import-sites/${domain}/${domain}/ ${docroot}/ &&
 sudo chown vagrant:vagrant -R * .* &&
 sudo chmod -R u+w * .*",
     unless => "ls ${docroot}/index.php",
-    onlyif => "ls /vagrant/import-sites/${domain}/index.php",
+    onlyif => "ls /vagrant/import-sites/${domain}/${domain}/index.php",
     cwd => "${docroot}",
     path => ['/bin/', '/usr/bin/'],
     require => [Package['rsync'], File['/var/www']],
@@ -71,9 +71,9 @@ sudo chmod -R u+w * .*",
 
   if $settings_file_source {
     exec { "copy-${domain}-settings":
-      command => "cp /vagrant/import-sites/${settings_file_source} ${docroot}/${settings_file_destination}",
-      onlyif => "ls /vagrant/import-sites/${settings_file_source} && ls ${docroot}/index.php",
-      unless => "ls ${settings_file_destination}",
+      command => "cp /vagrant/import-sites/${domain}/${settings_file_source} ${docroot}/${settings_file_destination}",
+      onlyif => "ls /vagrant/import-sites/${domain}/${settings_file_source} && ls ${docroot}/index.php",
+      unless => "ls ${docroot}/${settings_file_destination}",
       path => ['/bin/', '/usr/bin/'],
       require => Exec["sync-${domain}-dir"],
     }
