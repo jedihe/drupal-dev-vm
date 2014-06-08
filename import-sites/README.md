@@ -4,10 +4,12 @@ The provisioning includes auto-importing for the sites added via drupal\_site
 resource. The naming convention is as follows (assuming import-sites is the
 current directory):
 
-1. Drupal's directory must be named "<site-name>", such that index.php is at
-   <site-name>/<site-name>/index.php (yes, 2 directories with same name)
-2. SQL dump must be gzipped and named "<site-name>/<site-name>.sql.gz"
-3. settings.php must be named "<site-name>/<site-name>.settings.php"
+1. Drupal's directory must be named "\<domain\>/\<domain\>", such that index.php is at
+   \<domain\>/\<domain\>/index.php (yes, 2 directories with same name)
+2. SQL dump must be gzipped and named "\<domain\>/\<domain\>.sql.gz"
+3. settings.php must be named "\<domain\>/\<domain\>.settings.php"
+4. import\_sites.pp must be edited to add a new drupal\_site resource,
+   be careful to set the correct value for the domain attribute.
 
 ### Please note:
 
