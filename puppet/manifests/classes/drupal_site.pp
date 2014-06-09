@@ -71,9 +71,9 @@ sudo chmod -R u+w * .*",
 
   if $settings_file_source {
     exec { "copy-${domain}-settings":
-      command => "cp /vagrant/import-sites/${domain}/${settings_file_source} ${docroot}/${settings_file_destination}",
+      command => "rm ${docroot}/${settings_file_destination} &&
+cp /vagrant/import-sites/${domain}/${settings_file_source} ${docroot}/${settings_file_destination}",
       onlyif => "ls /vagrant/import-sites/${domain}/${settings_file_source} && ls ${docroot}/index.php",
-      unless => "ls ${docroot}/${settings_file_destination}",
       path => ['/bin/', '/usr/bin/'],
       require => Exec["sync-${domain}-dir"],
     }
