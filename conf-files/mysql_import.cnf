@@ -1,0 +1,5 @@
+[mysqld]
+# Performance settings used for import.
+# Used only temporarily, during DB imports.
+delay_key_write=ALL
+bulk_insert_buffer_size=256M
