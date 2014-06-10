@@ -1,5 +1,5 @@
-class gui_unity {
-  exec { 'ubuntu-desktop':
+class de_unity {
+  exec { 'desktop environment':
     command => 'sudo apt-get install --no-install-recommends --yes --fix-missing ubuntu-desktop lightdm &&
 echo "ubuntu-desktop-installed" > /home/vagrant/flag-ubuntu-desktop.txt',
     timeout => 0,

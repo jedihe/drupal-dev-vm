@@ -12,7 +12,7 @@ node "precise32" {
   include php_testing
 
   # Uncomment to install Unity desktop environment
-  #include gui_unity
+  #include de_unity
 
 }
 
