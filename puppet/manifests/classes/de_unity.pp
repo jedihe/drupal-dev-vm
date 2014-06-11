@@ -9,4 +9,29 @@ echo "ubuntu-desktop-installed" > /home/vagrant/flag-ubuntu-desktop.txt',
     path      => "/usr/bin:/usr/sbin:/bin:/usr/local/bin:/opt/local/bin",
     logoutput => true,
   }
+
+  $unity_packages = [
+    'firefox-globalmenu',
+    'indicator-multiload',
+    'libappindicator1',
+    'indicator-datetime',
+    'indicator-session',
+    'indicator-sound',
+    'network-manager-gnome',
+    'ttf-ubuntu-font-family',
+    'unity-lens-applications',
+  ]
+  package { $unity_packages:
+    ensure => 'installed',
+  }
+
+  #$remove_packages = [
+    #'indicator-applet-appmenu',
+    #'indicator-applet-session',
+    #'indicator-messages',
+    #'indicator-applet-complete',
+  #]
+  #package { $remove_packages:
+    #ensure => 'purged',
+  #}
 }
