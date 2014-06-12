@@ -20,6 +20,7 @@ echo "ubuntu-desktop-installed" > /home/vagrant/flag-ubuntu-desktop.txt',
     'network-manager-gnome',
     'ttf-ubuntu-font-family',
     'unity-lens-applications',
+    'unity-lens-files',
   ]
   package { $unity_packages:
     ensure => 'installed',
@@ -34,4 +35,14 @@ echo "ubuntu-desktop-installed" > /home/vagrant/flag-ubuntu-desktop.txt',
   #package { $remove_packages:
     #ensure => 'purged',
   #}
+
+  file { 'chromium launcher':
+    source => '/usr/share/applications/chromium-browser.desktop',
+    path => '/home/vagrant/Desktop/chromium-browser.desktop',
+    owner => 'vagrant',
+    group => 'vagrant',
+    mode => 755,
+    ensure => 'present',
+    require => [Package['chromium-browser']],
+  }
 }
