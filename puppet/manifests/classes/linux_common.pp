@@ -57,19 +57,21 @@ default_transport = error:postfix configured to not route email",
     command => "git clone https://github.com/robbyrussell/oh-my-zsh.git .oh-my-zsh &&
     chown -R vagrant:vagrant .oh-my-zsh &&
     chsh -s /bin/zsh vagrant",
+    creates => '/home/vagrant/.oh-my-zsh',
     logoutput => true,
     cwd => "/home/vagrant",
     path => ['/bin/', '/usr/bin/'],
-    unless => "test -s /home/vagrant/.zshrc",
     require => [Class['git'], Package['zsh']],
   }
 
-  file { '/home/vagrant/.zshrc':
-    ensure => 'file',
+  file { 'zshrc':
+    ensure => present,
     source => "/vagrant/dotfiles/.zshrc",
+    path => '/home/vagrant/.zshrc',
     mode   => 664,
     owner => "vagrant",
     group => "vagrant",
+    replace => true,
     require => Exec['oh-my-zsh'],
   }
 }
