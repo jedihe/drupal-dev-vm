@@ -48,14 +48,14 @@ define drupal_site(
     exec { "sync-${domain}-db":
       command => "mysqldump -u${db_name} -p${db_name} --no-data --add-drop-table ${db_name} | grep ^DROP | mysql -u${db_name} -p${db_name} ${db_name} &&
 cp /vagrant/conf-files/mysql_import.cnf /etc/mysql/conf.d/mysql_import.cnf &&
-service mysql restart &&
+/etc/init.d/mysql restart &&
 zcat /vagrant/import-sites/${domain}/${domain}.sql.gz | mysql -u${db_name} -p${db_name} ${db_name} &&
 rm /etc/mysql/conf.d/mysql_import.cnf &&
-service mysql restart &&
+/etc/init.d/mysql restart &&
 echo \"imported ${domain}.sql.gz; remove this file to re-import.\" > /vagrant/import-sites/${domain}/${domain}.import.lock",
       unless => "ls /vagrant/import-sites/${domain}/${domain}.import.lock",
       onlyif => "ls /vagrant/import-sites/${domain}/${domain}.sql.gz",
-      path => ['/bin/', '/usr/bin/'],
+      path => ['/bin', '/usr/bin', '/usr/sbin'],
       timeout => 0, # DB dumps can take a long time to import, disable timeout.
       logoutput => true,
       require => [Mysql::Db["$db_name"]],
