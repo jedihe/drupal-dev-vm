@@ -10,6 +10,7 @@ node "precise32" {
   include runkit
   include import_sites
   include php_testing
+  include xhprof
 
   # Uncomment to install Unity desktop environment
   #include de_unity
