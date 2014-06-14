@@ -54,6 +54,8 @@ Vagrant.configure("2") do |config|
 
   # Additional customizations for the VM itself
   config.vm.provider "virtualbox" do |vm|
+    # Enable to get the GUI of the VM
+    #vm.gui = true
     vm.customize ["modifyvm", :id, "--memory", 3072]
     vm.customize ["modifyvm", :id, "--cpus", "2"]
     vm.customize ["modifyvm", :id, "--ioapic", "on"]
