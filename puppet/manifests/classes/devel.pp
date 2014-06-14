@@ -35,8 +35,38 @@ xhprof.output_dir=/var/tmp/xhprof',
     mode    =>  644,
     require => [
       Class['apache::mod::php'],
-      Exec['install xhprof']
-    ]
+      Exec['install xhprof'],
+      File['/var/tmp/xhprof']
+    ],
+  }
+
+  file { '/etc/apache2/sites-enabled/xhprof.conf':
+    ensure => 'present',
+    content => '
+Alias /xhprof_html /usr/share/php/xhprof_html
+
+<Directory /usr/share/php/xhprof_html>
+  Options FollowSymLinks
+  DirectoryIndex index.php
+</Directory>
+    ',
+    mode => 644,
+    require => [Class['apache']],
+    notify => Class['apache::service'],
+  }
+
+  file { '/var/tmp/xhprof':
+    ensure => 'directory',
+    mode => 664,
+    owner => 'vagrant',
+    group => 'www-data',
+    require => [Exec['install xhprof']],
+  }
+
+  # Needed for callgraph functionality of XHProf
+  package { 'graphviz':
+    ensure => 'installed',
+    require => [Exec['install xhprof']],
   }
 
   curl::fetch_and_command { "composer-install":
