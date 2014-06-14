@@ -74,12 +74,19 @@ sudo chmod -R u+w * .*",
   }
 
   if $settings_file_source {
+    exec { "remove-${domain}-settings-file":
+      command => "rm ${docroot}/${settings_file_destination}",
+      onlyif => "ls ${docroot}/${settings_file_destination}",
+      path => ['/bin/', '/usr/bin/'],
+    }
+
     exec { "copy-${domain}-settings":
-      command => "rm ${docroot}/${settings_file_destination} &&
-cp /vagrant/import-sites/${domain}/${settings_file_source} ${docroot}/${settings_file_destination}",
+      command => "cp /vagrant/import-sites/${domain}/${settings_file_source} ${docroot}/${settings_file_destination}",
       onlyif => "ls /vagrant/import-sites/${domain}/${settings_file_source} && ls ${docroot}/index.php",
       path => ['/bin/', '/usr/bin/'],
-      require => Exec["sync-${domain}-dir"],
+      user => 'vagrant',
+      group => 'vagrant',
+      require => [Exec["sync-${domain}-dir"], Exec["remove-${domain}-settings-file"]],
     }
   }
 
