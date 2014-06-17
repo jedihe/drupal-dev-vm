@@ -18,9 +18,27 @@ class drupal {
     creates => '/usr/bin/drush'
   }
 
+  file { '/home/vagrant/.drush':
+    ensure => 'directory',
+    owner => 'vagrant',
+    group => 'vagrant',
+    mode => 644,
+  }
+
+  exec { "install quickstart commands":
+    command => 'sudo git clone http://git.drupal.org/project/quickstart.git',
+    cwd => '/home/vagrant/.drush',
+    user => 'vagrant',
+    unless => 'ls /home/vagrant/.drush/quickstart',
+    path => ['/bin', '/usr/bin', '/usr/sbin'],
+    require => [File['/home/vagrant/.drush']],
+  }
+
   # create the main web directory parent
   file { "/var/www":
-    ensure => "directory"
+    ensure => "directory",
+    owner => 'vagrant',
+    group => 'www-data',
   }
 
   # setup the crontab
