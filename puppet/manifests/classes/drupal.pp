@@ -31,7 +31,7 @@ class drupal {
     user => 'vagrant',
     unless => 'ls /home/vagrant/.drush/quickstart',
     path => ['/bin', '/usr/bin', '/usr/sbin'],
-    require => [File['/home/vagrant/.drush']],
+    require => [File['/home/vagrant/.drush'], Package['git']],
   }
 
   # create the main web directory parent
