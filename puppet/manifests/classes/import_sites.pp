@@ -10,6 +10,7 @@ class import_sites {
     domain => 'local.acme.com',
     docroot => '/var/www',
     add_vhost => true,
+    vhost_priority => '01',
     proxy_pass => $proxy_pass,
     port => 8080,
   }

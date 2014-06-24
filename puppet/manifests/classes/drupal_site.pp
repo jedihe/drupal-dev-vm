@@ -3,6 +3,7 @@ define drupal_site(
   $docroot,
   $db_name = undef,
   $add_vhost = false,
+  $vhost_priority = '10',
   $docroot_owner = "vagrant",
   $docroot_group = "vagrant",
   $port = 80,
@@ -17,7 +18,7 @@ define drupal_site(
 
   if $add_vhost {
     apache::vhost { $domain:
-      priority => '10',
+      priority => $vhost_priority,
       vhost_name => '*',
       port => $port,
       docroot => $docroot,
