@@ -1,0 +1,84 @@
+diff --git a/quickstart.drush.inc b/quickstart.drush.inc
+index 8a1c573..b1fd307 100644
+--- a/quickstart.drush.inc
++++ b/quickstart.drush.inc
+@@ -169,11 +169,11 @@ function _quickstart_params($required) {
+   $defaults['domain_'] = $domain_ = str_replace('.', '_', $options['domain']);
+   // Database.
+   $defaults['dbuser'] = 'root';
+-  $defaults['dbpassword'] = 'quickstart';
++  $defaults['dbpassword'] = 'root';
+   // Apache, code, install.
+-  $defaults['codepath'] = quickstart_fixpath("~/websites/{$options['domain']}");
++  $defaults['codepath'] = quickstart_fixpath("/var/www/{$options['domain']}");
+   // Code, install (check version).
+-  $defaults['makefile'] = quickstart_fixpath('~/websites/default.make');
++  $defaults['makefile'] = quickstart_fixpath('/vagrant/makefiles/d7.make');
+   // Install.
+   $defaults['profile'] = 'standard';
+   $defaults['db-url'] = "mysql://{$domain_}:{$domain_}@localhost/{$domain_}";
+@@ -221,7 +221,7 @@ function drush_quickstart_fixperms() {
+ 
+   $codepath = $params['codepath'];
+ 
+-  quickstart_shell_exec("sudo chown -R quickstart:www-data {$codepath}");
++  quickstart_shell_exec("sudo chown -R vagrant:www-data {$codepath}");
+   quickstart_shell_exec("sudo chmod -R a=,u=rwX,g=rX {$codepath}");
+   // Find directories named "files" and run chmod on them.
+   quickstart_shell_exec("sudo find {$codepath}/sites -type d -name files -exec chmod -R a=,ug=rwX '{}' \;");
+diff --git a/quickstart.inc b/quickstart.inc
+index d8eb257..e32aca9 100644
+--- a/quickstart.inc
++++ b/quickstart.inc
+@@ -77,8 +77,10 @@ function quickstart_create_dns($domain_name) {
+   $padded_domain_name = " {$domain_name} ";
+ 
+   if (!strpos($hosts_file, $padded_domain_name)) {
+-    $entry = PHP_EOL . "127.0.0.1 {$domain_name} #quickstart";
+-    file_put_contents('/etc/hosts', $entry, FILE_APPEND | LOCK_EX);
++    // Must be scaped to be fed to sed
++    $entry = "127.0.0.1 {$domain_name} #quickstart";
++    $escaped_entry = str_replace(".", "\.", $entry);
++    quickstart_shell_exec("sudo sed -i '\$a {$escaped_entry}' /etc/hosts");
+   }
+   else {
+     $message = dt('DNS has already been configured for @domain.', array(
+@@ -120,10 +122,12 @@ function quickstart_create_apache($domain_name, $document_root) {
+   $vhost = file_get_contents(__DIR__ . '/templates/vhost.txt');
+   $vhost = str_replace('#DOMAIN#', $domain_name, $vhost);
+   $vhost = str_replace('#DOCROOT#', $document_root, $vhost);
+-  file_put_contents("/etc/apache2/sites-available/{$domain_name}", $vhost, LOCK_EX);
++  $random_tmp_file = "apache-vhost-" . substr( md5(rand()), 0, 12);
++  file_put_contents("/tmp/{$random_tmp_file}", $vhost, LOCK_EX);
++  quickstart_shell_exec("sudo cp /tmp/{$random_tmp_file} /etc/apache2/sites-available/{$domain_name}.conf");
+ 
+   // Enable the vhost and restart Apache.
+-  quickstart_shell_exec("sudo a2ensite {$domain_name}");
++  quickstart_shell_exec("sudo a2ensite {$domain_name}.conf");
+   quickstart_shell_exec('sudo apache2ctl restart');
+ }
+ 
+@@ -134,10 +138,10 @@ function quickstart_create_apache($domain_name, $document_root) {
+  *   The domain name.
+  */
+ function quickstart_destroy_apache($domain) {
+-  quickstart_shell_exec("sudo a2dissite {$domain}", FALSE);
+-  $filename = "/etc/apache2/sites-available/{$domain}";
++  quickstart_shell_exec("sudo a2dissite {$domain}.conf", FALSE);
++  $filename = "/etc/apache2/sites-available/{$domain}.conf";
+   if (file_exists($filename)) {
+-    unlink($filename);
++    quickstart_shell_exec("sudo rm {$filename}", FALSE);
+   }
+   quickstart_shell_exec('sudo apache2ctl restart');
+ }
+diff --git a/templates/vhost.txt b/templates/vhost.txt
+index 0bec7d6..2ff2d37 100644
+--- a/templates/vhost.txt
++++ b/templates/vhost.txt
+@@ -1,4 +1,4 @@
+-<VirtualHost *:80>
++<VirtualHost *:8080>
+   ServerName #DOMAIN#
+   ServerAlias *.#DOMAIN#
+   DocumentRoot #DOCROOT#

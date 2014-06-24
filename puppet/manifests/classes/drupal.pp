@@ -25,13 +25,24 @@ class drupal {
     mode => 644,
   }
 
-  exec { "install quickstart commands":
-    command => 'sudo git clone http://git.drupal.org/project/quickstart.git',
+  exec { "install drush-quickstart":
+    command => 'git clone http://git.drupal.org/project/quickstart.git',
     cwd => '/home/vagrant/.drush',
     user => 'vagrant',
-    unless => 'ls /home/vagrant/.drush/quickstart',
+    creates => '/home/vagrant/.drush/quickstart',
     path => ['/bin', '/usr/bin', '/usr/sbin'],
     require => [File['/home/vagrant/.drush'], Package['git']],
+  }
+
+  exec { "patch drush-quickstart":
+    command => 'git checkout e5541eb4fc6ecac4de42b40156125aacff9ce01a &&
+patch -p1 < /vagrant/patches/quickstart-adjustments.patch &&
+echo "Quickstart was patched successfully!" > /home/vagrant/.drush/quickstart.lock',
+    cwd => '/home/vagrant/.drush/quickstart',
+    user => 'vagrant',
+    creates => '/home/vagrant/.drush/quickstart.lock',
+    path => ['/bin', '/usr/bin', '/usr/sbin'],
+    require => [Exec['install drush-quickstart']],
   }
 
   # create the main web directory parent
