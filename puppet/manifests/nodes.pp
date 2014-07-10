@@ -11,6 +11,7 @@ node "precise32" {
   include import_sites
   include php_testing
   include xhprof
+  include xdebug
 
   # Uncomment to install Unity desktop environment
   #include de_unity
