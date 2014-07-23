@@ -26,7 +26,7 @@ define curl::fetch(
   }
 
   exec { "curl-fetch-$name":
-    command   => "curl $proxy_option $verbose_option --output $destination $source",
+    command   => "curl -L $proxy_option $verbose_option --output $destination $source",
     timeout   => $timeout,
     unless    => "test -s $destination",
     logoutput => $logoutput,
