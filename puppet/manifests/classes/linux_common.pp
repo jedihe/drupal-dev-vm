@@ -5,16 +5,18 @@ class linux_common {
       replace => true,
       content => "Acquire::http::Proxy \"${http_proxy}\";",
     }
-    exec { "apt-update":
-        command => "/usr/bin/apt-get update",
-        require => File['/etc/apt/apt.conf.d/30proxy']
-    }
   }
   else {
-    exec { "apt-update":
-        command => "/usr/bin/apt-get update",
+    file { "/etc/apt/apt.conf.d/30proxy":
+      ensure  => "absent",
     }
   }
+
+  exec { "apt-update":
+      command => "/usr/bin/apt-get update",
+      require => File['/etc/apt/apt.conf.d/30proxy']
+  }
+
   # Require apt-update for every Package command
   Exec["apt-update"] -> Package <| |>
   Package["puppet"] -> Augeas <| |>
