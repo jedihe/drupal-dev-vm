@@ -13,8 +13,8 @@ class linux_common {
   }
 
   exec { "apt-update":
-    command => "/usr/bin/apt-get update",
-    require => File['/etc/apt/apt.conf.d/30proxy']
+      command => "/usr/bin/apt-get update",
+      require => File['/etc/apt/apt.conf.d/30proxy']
   }
 
   # Require apt-update for every Package command
