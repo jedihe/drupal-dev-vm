@@ -19,6 +19,13 @@ class git {
       require => Package['git'],
     }
   }
+  else {
+    exec { "git-no-proxy":
+      command => "git config --global --unset http.proxy",
+      path => ['/bin', '/usr/bin'],
+      user => 'vagrant',
+    }
+  }
 }
 
 define git::config (
@@ -31,6 +38,7 @@ define git::config (
       command => "git config --global $variable $value",
       timeout => 5,
       unless => "git config $variable | grep \"$value\"",
+      user => 'vagrant',
       require => Package['git'],
       path => ['/bin', '/usr/bin'],
     }
