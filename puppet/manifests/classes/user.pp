@@ -3,13 +3,13 @@
 define add_user ($email, $uid, $password) {
   $username = $title
 
-  user { $username:
-    comment => "$email",
-    home => "/home/$username",
-    shell => "/bin/bash",
-    uid => $uid,
-    groups => ['sudo']
-  }
+  #user { $username:
+    #comment => "$email",
+    #home => "/home/$username",
+    #shell => "/bin/bash",
+    #uid => $uid,
+    #groups => ['sudo']
+  #}
 
   group { $username:
     gid => $uid,
