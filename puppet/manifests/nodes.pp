@@ -1,4 +1,4 @@
-node "precise32" {
+node "default" {
   include linux_common
   include drupal
   include devel
@@ -16,5 +16,10 @@ node "precise32" {
   # Uncomment to install Unity desktop environment
   #include de_unity
 
+  add_user {"vagrant":
+    email => 'none@vagrant.com',
+    uid => 5001,
+    password => 'vagrant',
+  }
 }
 
