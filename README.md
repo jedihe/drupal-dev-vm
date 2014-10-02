@@ -65,4 +65,4 @@ headless manner.
 
 ## Disclaimer
 
-This Vagrant based VM started from [FunnyMonkey/fm-vagrant](https://github.com/FunnyMonkey/fm-vagrant), but I had to change it so much to suit my needs that I just decided to publish my modified version in a new repo. I plan on doing some cleanup later to get file names cleaner (no fm\_ prefix).
+This Vagrant based VM started from [FunnyMonkey/fm-vagrant](https://github.com/FunnyMonkey/fm-vagrant), but I had to change it so much to suit my needs that I just decided to publish my modified version in a new repo. I plan on doing some cleanup on file names later (no fm\_ prefix).
