@@ -6,7 +6,7 @@ class xdebug {
 
   file { '/etc/php5/conf.d/xdebug.ini':
     ensure => 'present',
-    content => "zend_extension=/usr/lib/php5/20090626/xdebug.so
+    content => "zend_extension=/usr/lib/php5/20090626+lfs/xdebug.so
 xdebug.remote_enable=on
 xdebug.remote_handler=dbgp
 xdebug.remote_host=localhost

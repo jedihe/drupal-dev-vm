@@ -3,7 +3,7 @@ class xhprof {
   exec { 'install xhprof':
     command => "${pear_proxy_prefix}sudo pecl install -f xhprof-0.9.2",
     require => Package['php5-common'],
-    creates => '/usr/lib/php5/20090626/xhprof.so',
+    creates => '/usr/lib/php5/20090626+lfs/xhprof.so',
   }
 
   file { '/var/tmp/xhprof':
