@@ -4,8 +4,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "env" do |v|
     v.vm.provider "docker" do |d|
       d.cmd = ["/sbin/my_init", "--enable-insecure-key"]
-      # Use last release for Ubuntu 12.04
-      d.image = "phusion/baseimage:0.9.9"
+      d.image = "jedihe/baseimage-i386:precise"
       d.has_ssh = true
     end
 
