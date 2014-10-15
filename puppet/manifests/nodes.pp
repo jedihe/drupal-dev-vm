@@ -23,16 +23,5 @@ node "default" {
     uid => 5001,
     password => 'vagrant',
   }
-
-  # Add insecure_key.pub for vagrant user
-  file { '/home/vagrant/.ssh/authorized_keys':
-    ensure  => present,
-    owner   => 'vagrant',
-    group   => 'vagrant',
-    mode    => '0600',
-    source  => '/vagrant/insecure_key.pub',
-    replace => true,
-    require => Add_user['vagrant'],
-  }
 }
 

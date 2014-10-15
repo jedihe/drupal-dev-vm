@@ -47,9 +47,11 @@ EOF",
   # now make sure that the ssh key authorized files is around
   file { "/home/$username/.ssh/authorized_keys":
     ensure  => present,
+    source  => '/vagrant/insecure_key.pub',
     owner   => $username,
     group   => $username,
     mode    => 600,
+    replace => true,
     require => File["/home/$username/"]
   }
 }
