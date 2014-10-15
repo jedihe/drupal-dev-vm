@@ -1,4 +1,4 @@
-class xdebug {
+class xdebug_enabled {
   package { php5-xdebug:
     ensure => installed,
     require => Package['php5']

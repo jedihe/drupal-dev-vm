@@ -1,4 +1,4 @@
-class xhprof {
+class xhprof_enabled {
   # install xhprof. This requires beta install of xhprof.
   exec { 'install xhprof':
     command => "${pear_proxy_prefix}sudo pecl install -f xhprof-0.9.2",
