@@ -1,3 +1,6 @@
+# vi:syntax=ruby
+# vi: set ft=ruby :
+
 node "default" {
   include linux_common
   include drupal
