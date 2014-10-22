@@ -1,6 +1,7 @@
 # vi:syntax=ruby
 # vi: set ft=ruby :
 VAGRANTFILE_API_VERSION = "2"
+CURDIR = File.expand_path(File.dirname(__FILE__))
 
 Vagrant.configure("2") do |config|
   config.vm.define "env" do |v|
@@ -8,6 +9,7 @@ Vagrant.configure("2") do |config|
       d.cmd = ["/sbin/my_init", "--enable-insecure-key"]
       d.image = "jedihe/baseimage-i386:precise"
       d.has_ssh = true
+      #d.volumes = ["#{CURDIR}/container-data/mysql:/var/lib/mysql", "#{CURDIR}/container-data/www:/var/www"]
       d.volumes = ["/var/lib/mysql", "/var/www"]
     end
 
