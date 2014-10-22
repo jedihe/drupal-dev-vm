@@ -3,6 +3,7 @@ class mysql_server {
 
   class { 'mysql::server':
     config_hash => { 'root_password' => 'root' },
+    enabled => 'true',
   }
 
   file { '/etc/service/mysql':
@@ -11,7 +12,9 @@ class mysql_server {
     #owner => "vagrant",
     #group => "vagrant",
     #recurse => true,
-    require => Class['mysql::server'],
+    require => [
+      Class['mysql::server']
+    ],
   }
 
   file { '/etc/service/mysql/run':
@@ -21,17 +24,13 @@ class mysql_server {
     require => File['/etc/service/mysql'],
   }
 
-  file { '/var/lib/mysql':
-    ensure => "directory",
-    mode => 755,
-    recurse => true,
-    require => Class['mysql::server'],
-  }
-
   file { '/etc/my_init.d/99_mysql_setup.sh':
     ensure => present,
     source => "/vagrant/99_mysql_setup.sh",
     mode => 755,
-    require => Class['mysql::server'],
+    require => [
+      Class['mysql::server'],
+      File['/etc/service/mysql/run'],
+    ],
   }
 }

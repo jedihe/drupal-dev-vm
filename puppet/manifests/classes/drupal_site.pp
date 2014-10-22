@@ -44,6 +44,7 @@ define drupal_site(
       password => $db_name,
       host => 'localhost',
       grant => ['all'],
+      require => File['/etc/my_init.d/99_mysql_setup.sh'],
     }
 
     exec { "sync-${domain}-db":
