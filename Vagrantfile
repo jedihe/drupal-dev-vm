@@ -6,6 +6,7 @@ Vagrant.configure("2") do |config|
       d.cmd = ["/sbin/my_init", "--enable-insecure-key"]
       d.image = "jedihe/baseimage-i386:precise"
       d.has_ssh = true
+      d.volumes = ["/var/lib/mysql", "/var/www"]
     end
 
     # Set some variables
