@@ -3,7 +3,7 @@
 1. If needing to import an existing site:
   1. Read import-sites/README, set up your code + settings file + DB dump.
   2. Adjust puppet/manifests/import\_sites.pp to get your new site properly imported and set up.
-2. Run "vagrant up" and wait :)
+2. Run "vagrant up --provider=docker" and wait :)
 
 ### SSH Keys
 
