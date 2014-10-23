@@ -25,6 +25,7 @@ node "default" {
     email => 'none@vagrant.com',
     uid => 5001,
     password => 'vagrant',
+    sudoer => true,
   }
 }
 

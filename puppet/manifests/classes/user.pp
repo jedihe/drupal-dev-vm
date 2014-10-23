@@ -1,6 +1,6 @@
 # http://itand.me/using-puppet-to-manage-users-passwords-and-ss
 
-define add_user ($email, $uid, $password) {
+define add_user ($email, $uid, $password, $sudoer = false) {
   $username = $title
 
   #user { $username:
@@ -53,6 +53,14 @@ EOF",
     mode    => 600,
     replace => true,
     require => File["/home/$username/"]
+  }
+
+  if $sudoer {
+    exec { "add $username to sudoers":
+      command => "/usr/sbin/adduser $username sudo",
+      unless => "/usr/bin/groups $username | /bin/grep sudo",
+      require => File["/home/$username/"],
+    }
   }
 }
 
