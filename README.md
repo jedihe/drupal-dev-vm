@@ -5,6 +5,16 @@
   2. Adjust puppet/manifests/import\_sites.pp to get your new site properly imported and set up.
 2. Run "vagrant up --provider=docker" and wait :)
 
+### Do You Trust Me? (i.e. Building the Docker image by yourself)
+
+It's a two-step process:
+
+1. Build the *Ubuntu 12.04 i386* image; instructions in [my Docker Registry repo](https://registry.hub.docker.com/u/jedihe/ubuntu-i386/).
+2. Build the final *Baseimage i386* image; instructions in [my Docker Registry repo](https://registry.hub.docker.com/u/jedihe/baseimage-i386/).
+
+You guessed it, the build process depends on other code I own... but since it's forked way back from the original repos, you can diff and see
+for yourself what changes did I make.
+
 ### SSH Keys
 
 (Taken almost verbatim from [FunnyMonkey/fm-vagrant](https://github.com/FunnyMonkey/fm-vagrant))
