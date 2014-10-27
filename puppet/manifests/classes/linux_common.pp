@@ -26,6 +26,7 @@ class linux_common {
     'nfs-common',
     'puppet',
     'make',
+    'man',
     'postfix',
     'rsync',
     'libxml-xpath-perl',
