@@ -1,3 +1,6 @@
+# vi:syntax=ruby
+# vi: set ft=ruby :
+
 Vagrant.configure("2") do |config|
   # Set some variables
   prod_domain = "http://acme.com"
