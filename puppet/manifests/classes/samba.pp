@@ -16,7 +16,7 @@ class samba {
   }
 
   exec { "vagrant user for samba":
-    command => "echo -ne 'vagrant\nvagrant\n' | smbpasswd -a vagrant",
+    command => "sh echo -ne 'vagrant\nvagrant\n' | smbpasswd -a -s vagrant",
     require => Package['samba'],
     path => ['/bin', '/usr/bin'],
   }
