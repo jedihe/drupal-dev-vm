@@ -1,3 +1,6 @@
+# vi:syntax=ruby
+# vi: set ft=ruby :
+
 node "precise32" {
   include linux_common
   include drupal
@@ -12,6 +15,9 @@ node "precise32" {
   include php_testing
   include xhprof
   include xdebug
+  # Uncomment to get a samba share for /var/www
+  # WARNING: defaults are *INSECURE*, edit conf-files/smb.conf to secure as needed.
+  #include samba
 
   # Uncomment to install Unity desktop environment
   #include de_unity
