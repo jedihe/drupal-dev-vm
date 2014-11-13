@@ -49,6 +49,8 @@ Vagrant.configure("2") do |config|
     end
   end
 
+  # Host only adapter, useful for Samba share. Not sure if it works when Host
+  # machine is connected to a VPN
   config.vm.network "private_network", ip: "33.33.33.11"
 
   # Forwarding works in tandem with the drupal_site{ ... } definitions (puppet/manifests/classes/import_sites.pp)
