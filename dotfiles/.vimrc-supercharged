@@ -191,6 +191,9 @@ au BufNewFile,BufRead *.test set filetype=php
 :nmap <C-l> gt
 :nmap <C-h> gT
 
+" Tagbar config
+nmap <F8> :TagbarToggle<CR>
+
 "Ctrl-P config
 :let g:ctrlp_map = '<C-P>'
 :let g:ctrlp_match_window_bottom = 0

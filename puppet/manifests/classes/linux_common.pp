@@ -23,6 +23,7 @@ class linux_common {
   Package['libaugeas-ruby'] -> Augeas <| |>
 
   $common_packages = [
+    'exuberant-ctags',
     'nfs-common',
     'puppet',
     'make',
