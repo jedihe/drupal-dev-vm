@@ -22,7 +22,23 @@ class linux_common {
   Package["puppet"] -> Augeas <| |>
   Package['libaugeas-ruby'] -> Augeas <| |>
 
-  package { ['nfs-common', 'puppet', 'make', 'postfix', 'rsync', 'libxml-xpath-perl', 'unzip', 'inotify-tools', 'htop', 'zsh']:
+  $common_packages = [
+    'exuberant-ctags',
+    'nfs-common',
+    'puppet',
+    'make',
+    'man',
+    'postfix',
+    'rsync',
+    'libxml-xpath-perl',
+    'unzip',
+    'inotify-tools',
+    'htop',
+    'tmux',
+    'zsh'
+  ]
+
+  package { $common_packages:
     ensure => installed,
   }
 

@@ -32,6 +32,7 @@ git clone https://github.com/godlygeek/tabular.git &&
 git clone https://github.com/SirVer/ultisnips.git &&
 git clone https://github.com/honza/vim-snippets.git &&
 git clone https://github.com/joonty/vdebug.git &&
+git clone https://github.com/majutsushi/tagbar.git &&
 chown -R vagrant:vagrant /home/vagrant/.vim",
     logoutput => true,
     cwd => "/home/vagrant/.vim/bundle",
