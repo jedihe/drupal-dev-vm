@@ -210,3 +210,6 @@ nmap <F8> :TagbarToggle<CR>
 "Powerline config
 set laststatus=2
 set t_Co=256
+
+"Syntastic config
+let g:syntastic_php_phpcs_args = "--standard=Drupal"
