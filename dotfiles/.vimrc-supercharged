@@ -193,6 +193,7 @@ au BufNewFile,BufRead *.test set filetype=php
 
 " Tagbar config
 nmap <F8> :TagbarToggle<CR>
+let g:tagbar_width = 55
 
 "Ctrl-P config
 :let g:ctrlp_map = '<C-P>'
