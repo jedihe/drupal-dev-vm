@@ -3,19 +3,13 @@ class drupal {
   include apache_php
   include compass
 
-  package { 'php-console-table':
-    ensure => installed,
-    require => Package['php-pear']
-  }
-
-  # install drush, we use this method over the ubuntu package as that requires
-  # a drush self-update that prompts for a version. This method uses drush's
-  # official pear channel.
   exec { 'install drush':
-    command => "${pear_proxy_prefix}pear channel-discover pear.drush.org && pear install drush/drush-6.2.0.0",
-    require => Package['php-console-table'],
-    path => ['/usr/bin'],
-    creates => '/usr/bin/drush'
+    command => "/usr/local/bin/composer global require drush/drush:7.0.0-alpha8",
+    require => Curl::Fetch_and_command['composer-install'],
+    path => ['/usr/bin', '/usr/local/bin'],
+    user => 'vagrant',
+    creates => '/home/vagrant/.composer/vendor/bin/drush',
+    timeout => 300,
   }
 
   file { '/home/vagrant/.drush':
