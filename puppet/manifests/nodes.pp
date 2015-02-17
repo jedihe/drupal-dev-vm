@@ -2,6 +2,7 @@
 # vi: set ft=ruby :
 
 node "default" {
+  include apt
   include linux_common
   include drupal
   include devel
