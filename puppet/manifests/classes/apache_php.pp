@@ -12,6 +12,21 @@ class apache_php {
 
   apache::mod{'rewrite': }
   apache::mod{'proxy_http': }
+  apache::mod{'status': }
+
+  file { '/etc/service/apache':
+    ensure => "directory",
+    require => [
+      Class['apache']
+    ],
+  }
+
+  file { '/etc/service/apache/run':
+    ensure => present,
+    source => "/vagrant/apache.sh",
+    mode => 755,
+    require => File['/etc/service/apache'],
+  }
 
   package { php5:
     ensure => installed,
