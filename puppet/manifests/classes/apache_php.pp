@@ -28,6 +28,20 @@ class apache_php {
     require => File['/etc/service/apache'],
   }
 
+  file { '/etc/apache2/mods-enabled/status.conf':
+    ensure => present,
+    content => "
+ExtendedStatus On
+<Location /server-status>
+SetHandler server-status
+Order Deny,Allow
+Allow from all
+</Location>
+    ",
+    mode => 644,
+    require => Apache::Mod['status'],
+  }
+
   package { php5:
     ensure => installed,
   }
