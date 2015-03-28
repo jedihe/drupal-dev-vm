@@ -92,4 +92,15 @@ default_transport = error:postfix configured to not route email",
     replace => true,
     require => Exec['oh-my-zsh'],
   }
+
+  file { 'tmux.conf':
+    ensure => present,
+    source => "/vagrant/dotfiles/.tmux.conf",
+    path => '/home/vagrant/.tmux.conf',
+    mode   => 664,
+    owner => "vagrant",
+    group => "vagrant",
+    replace => true,
+    require => Package['tmux'],
+  }
 }
