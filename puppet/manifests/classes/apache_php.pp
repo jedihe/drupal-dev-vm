@@ -28,7 +28,7 @@ class apache_php {
     require => File['/etc/service/apache'],
   }
 
-  file { '/etc/apache2/mods-enabled/status.conf':
+  file { '/etc/apache2/mods-available/status.conf':
     ensure => present,
     content => "
 ExtendedStatus On
