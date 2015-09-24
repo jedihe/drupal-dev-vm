@@ -5,3 +5,5 @@
 	email = your.email@somewhere
 [core]
 	editor = vim
+[merge]
+  conflictstyle = diff3
