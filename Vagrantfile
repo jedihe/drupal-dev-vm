@@ -2,6 +2,7 @@
 # vi: set ft=ruby :
 VAGRANTFILE_API_VERSION = "2"
 CURDIR = File.expand_path(File.dirname(__FILE__))
+HOSTUID = Process.uid
 
 Vagrant.configure("2") do |config|
   config.vm.define "env" do |v|
@@ -9,8 +10,7 @@ Vagrant.configure("2") do |config|
       d.cmd = ["/sbin/my_init", "--enable-insecure-key"]
       d.image = "jedihe/baseimage-i386:precise"
       d.has_ssh = true
-      #d.volumes = ["#{CURDIR}/container-data/mysql:/var/lib/mysql", "#{CURDIR}/container-data/www:/var/www"]
-      d.volumes = ["/var/lib/mysql", "/var/www"]
+      d.volumes = ["#{CURDIR}/volumes/mysql:/var/lib/mysql", "#{CURDIR}/volumes/www:/var/www"]
     end
 
     # Set some variables
@@ -40,6 +40,7 @@ Vagrant.configure("2") do |config|
           "fqdn" => fqdn,
           "http_proxy" => "#{proxy_url}",
           "http_proxy_host_port" => "#{proxy_url.host}:#{proxy_url.port}",
+          "host_uid" => "#{HOSTUID}",
           "use_proxy" => "1",
         }
       else
@@ -49,6 +50,7 @@ Vagrant.configure("2") do |config|
           "fqdn" => fqdn,
           "http_proxy" => "",
           "http_proxy_host_port" => "",
+          "host_uid" => "#{HOSTUID}",
           "use_proxy" => "0",
         }
       end

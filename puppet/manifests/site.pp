@@ -23,3 +23,5 @@ else {
   notice("Not using proxy.")
   $pear_proxy_prefix = ""
 }
+
+notice("Using host uid: $::host_uid.")

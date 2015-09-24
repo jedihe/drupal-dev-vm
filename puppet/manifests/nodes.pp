@@ -22,8 +22,8 @@ node "default" {
   #include de_unity
 
   add_user {"vagrant":
-    email => 'none@vagrant.com',
-    uid => 5001,
+    email => 'vagrant@localhost',
+    uid => $::host_uid,
     password => 'vagrant',
     sudoer => true,
   }
