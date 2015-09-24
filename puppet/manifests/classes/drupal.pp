@@ -12,7 +12,7 @@ class drupal {
   # a drush self-update that prompts for a version. This method uses drush's
   # official pear channel.
   exec { 'install drush':
-    command => "${pear_proxy_prefix}pear channel-discover pear.drush.org && pear install drush/drush-5.9.0",
+    command => "${pear_proxy_prefix}pear channel-discover pear.drush.org && pear install drush/drush-6.2.0.0",
     require => Package['php-console-table'],
     path => ['/usr/bin'],
     creates => '/usr/bin/drush'
