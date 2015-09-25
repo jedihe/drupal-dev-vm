@@ -23,13 +23,13 @@ Vagrant.configure("2") do |config|
       proxy_url = URI.parse(ENV['http_proxy'])
 
       v.vm.provision :shell, :inline => "/bin/rm -rf /vagrant/volumes/mysql/*"
-      v.vm.provision :shell, :inline => "/bin/sh /vagrant/99_mysql_setup.sh"
+      v.vm.provision :shell, :inline => "/bin/sh /vagrant/docker/99_mysql_setup.sh"
       v.vm.provision :shell, :inline => "/bin/echo 'export http_proxy=#{proxy_url}' >> /etc/profile.d/proxy.sh"
       v.vm.provision :shell, :inline => "export http_proxy='#{proxy_url}' && /usr/bin/apt-get update"
       v.vm.provision :shell, :inline => "export http_proxy='#{proxy_url}' && /usr/bin/apt-get install -y puppet libaugeas-ruby augeas-tools rubygems"
     else
       v.vm.provision :shell, :inline => "/bin/rm -rf /vagrant/volumes/mysql/*"
-      v.vm.provision :shell, :inline => "/bin/sh /vagrant/99_mysql_setup.sh"
+      v.vm.provision :shell, :inline => "/bin/sh /vagrant/docker/99_mysql_setup.sh"
       v.vm.provision :shell, :inline => "/usr/bin/apt-get update"
       v.vm.provision :shell, :inline => "/usr/bin/apt-get install -y puppet libaugeas-ruby augeas-tools rubygems"
     end

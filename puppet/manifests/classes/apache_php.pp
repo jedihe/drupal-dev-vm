@@ -20,7 +20,7 @@ class apache_php {
 
   file { '/etc/service/apache/run':
     ensure => present,
-    source => "/vagrant/apache.sh",
+    source => "/vagrant/docker/apache.sh",
     mode => 755,
     require => File['/etc/service/apache'],
   }

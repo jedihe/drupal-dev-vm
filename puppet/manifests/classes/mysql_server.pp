@@ -8,10 +8,6 @@ class mysql_server {
 
   file { '/etc/service/mysql':
     ensure => "directory",
-    #mode => 755,
-    #owner => "vagrant",
-    #group => "vagrant",
-    #recurse => true,
     require => [
       Package['mysql-server'],
     ],
@@ -19,14 +15,14 @@ class mysql_server {
 
   file { '/etc/service/mysql/run':
     ensure => present,
-    source => "/vagrant/mysql.sh",
+    source => "/vagrant/docker/mysql.sh",
     mode => 755,
     require => File['/etc/service/mysql'],
   }
 
   file { '/etc/my_init.d/99_mysql_setup.sh':
     ensure => present,
-    source => "/vagrant/99_mysql_setup.sh",
+    source => "/vagrant/docker/99_mysql_setup.sh",
     mode => 755,
     require => [
       File['/etc/service/mysql/run'],
