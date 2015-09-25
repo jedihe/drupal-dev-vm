@@ -8,7 +8,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "env" do |v|
     v.vm.provider "docker" do |d|
       d.cmd = ["/sbin/my_init", "--enable-insecure-key"]
-      d.image = "jedihe/baseimage-i386:precise"
+      d.image = "jedihe/d67-dev-env-i386:precise"
       d.has_ssh = true
       d.volumes = ["#{CURDIR}/volumes/mysql:/var/lib/mysql", "#{CURDIR}/volumes/www:/var/www"]
     end
@@ -22,10 +22,14 @@ Vagrant.configure("2") do |config|
       require 'uri'
       proxy_url = URI.parse(ENV['http_proxy'])
 
+      v.vm.provision :shell, :inline => "/bin/rm -rf /vagrant/volumes/mysql/*"
+      v.vm.provision :shell, :inline => "/bin/sh /vagrant/99_mysql_setup.sh"
       v.vm.provision :shell, :inline => "/bin/echo 'export http_proxy=#{proxy_url}' >> /etc/profile.d/proxy.sh"
       v.vm.provision :shell, :inline => "export http_proxy='#{proxy_url}' && /usr/bin/apt-get update"
       v.vm.provision :shell, :inline => "export http_proxy='#{proxy_url}' && /usr/bin/apt-get install -y puppet libaugeas-ruby augeas-tools rubygems"
     else
+      v.vm.provision :shell, :inline => "/bin/rm -rf /vagrant/volumes/mysql/*"
+      v.vm.provision :shell, :inline => "/bin/sh /vagrant/99_mysql_setup.sh"
       v.vm.provision :shell, :inline => "/usr/bin/apt-get update"
       v.vm.provision :shell, :inline => "/usr/bin/apt-get install -y puppet libaugeas-ruby augeas-tools rubygems"
     end

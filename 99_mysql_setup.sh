@@ -2,7 +2,7 @@
 
 if [ ! -d /var/lib/mysql/mysql ]; then
     echo 'Rebuilding mysql data dir'
-        
+
     chown -R mysql.mysql /var/lib/mysql
     mysql_install_db > /dev/null
 
@@ -16,7 +16,7 @@ if [ ! -d /var/lib/mysql/mysql ]; then
     while [ ! -x /var/run/mysqld/mysqld.sock ]; do
         sleep 1
     done
-    
+
     echo 'Setting root password to root'
     /usr/bin/mysqladmin -u root password 'root'
 
@@ -35,3 +35,4 @@ if [ ! -d /var/lib/mysql/mysql ]; then
     mysqladmin -uroot -proot shutdown
 
 fi
+

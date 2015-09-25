@@ -13,7 +13,7 @@ class mysql_server {
     #group => "vagrant",
     #recurse => true,
     require => [
-      Class['mysql::server']
+      Package['mysql-server'],
     ],
   }
 
@@ -29,7 +29,6 @@ class mysql_server {
     source => "/vagrant/99_mysql_setup.sh",
     mode => 755,
     require => [
-      Class['mysql::server'],
       File['/etc/service/mysql/run'],
     ],
   }

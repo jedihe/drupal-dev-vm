@@ -62,10 +62,10 @@ echo \"imported ${domain}.sql.gz; remove this file to re-import.\" > /vagrant/im
 
   exec { "sync-${domain}-dir":
     command => "sudo rsync -r --delete /vagrant/import-sites/${domain}/${domain}/ ${docroot}/ &&
-sudo chown vagrant:vagrant -R * .* &&
-sudo chmod -R u+w * .*",
-    unless => "ls ${docroot}/index.php",
-    onlyif => "ls /vagrant/import-sites/${domain}/${domain}/index.php",
+sudo chown vagrant:www-data -R * .* &&
+sudo chmod -R u+w,g+w * .*",
+    unless => "ls ${docroot}/index.php || ls ${docroot}/index.html",
+    onlyif => "ls /vagrant/import-sites/${domain}/${domain}/index.php || ls /vagrant/import-sites/${domain}/${domain}/index.html",
     cwd => "${docroot}",
     path => ['/bin/', '/usr/bin/'],
     require => [Package['rsync'], File['/var/www']],
