@@ -1,10 +1,7 @@
 class apache_php {
   include mysql
 
-  class {'apache':
-    user => 'vagrant',
-    group => 'www-data',
-  }
+  class {'apache': }
 
   class {'apache::mod::php':
     require => Package["php5"]
