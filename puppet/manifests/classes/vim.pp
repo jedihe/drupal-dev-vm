@@ -29,7 +29,6 @@ git clone https://github.com/ap/vim-css-color.git &&
 git clone https://github.com/mattn/emmet-vim.git &&
 git clone https://github.com/tpope/vim-surround.git &&
 git clone https://github.com/godlygeek/tabular.git &&
-git clone https://github.com/SirVer/ultisnips.git &&
 git clone https://github.com/honza/vim-snippets.git &&
 git clone https://github.com/joonty/vdebug.git &&
 git clone https://github.com/majutsushi/tagbar.git &&
