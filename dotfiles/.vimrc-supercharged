@@ -214,3 +214,9 @@ set t_Co=256
 
 "Syntastic config
 let g:syntastic_php_phpcs_args = "--standard=Drupal"
+
+"Taggatron config
+let g:tagcommands = {
+\     "php" : {"tagfile":".php.tags","args":"-R --langmap=php:.engine.inc.module.theme.install.php --php-kinds=cdfi"}
+\}
+"let g:taggatron_verbose = 1
