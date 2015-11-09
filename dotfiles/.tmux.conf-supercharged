@@ -5,6 +5,7 @@ set -g history-limit 10000
 
 # reload ~/.tmux.conf using PREFIX r
 bind r source-file ~/.tmux.conf \; display "Reloaded!"
+bind C-q confirm-before -p "kill-session #S? (y/n)" kill-session
 
 # Do not require releasing Ctrl to cycle through windows
 bind C-p previous-window
