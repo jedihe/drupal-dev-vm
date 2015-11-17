@@ -15,7 +15,8 @@ echo "Running apt-get update"
 $minimal_apt_get_install puppet \
 libaugeas-ruby \
 augeas-tools \
-rubygems
+rubygems \
+lsb-release
 
 echo "Installing packages"
 $minimal_apt_get_install apache2 \
@@ -103,7 +104,6 @@ echo "Installing packages from pear/pecl"
 /usr/bin/wget https://phar.phpunit.de/phpunit.phar
 /bin/chmod +x phpunit.phar
 /bin/mv phpunit.phar /usr/local/bin/phpunit
-
 
 #  cleanup.sh
 echo "Running final clean-up"
