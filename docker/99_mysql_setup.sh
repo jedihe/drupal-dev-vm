@@ -1,6 +1,10 @@
 #!/usr/bin/env sh
 
 if [ ! -d /var/lib/mysql/mysql ]; then
+    echo "Killing any previous mysqld process"
+    killall mysqld
+    killall mysqld_safe
+
     echo 'Rebuilding mysql data dir'
 
     chown -R mysql.mysql /var/lib/mysql
@@ -12,8 +16,8 @@ if [ ! -d /var/lib/mysql/mysql ]; then
     # The sleep 1 is there to make sure that inotifywait starts up before the socket is created
     mysqld_safe &
 
-    echo 'Waiting for mysqld to come online'
     while [ ! -x /var/run/mysqld/mysqld.sock ]; do
+        echo 'Waiting for mysqld to come online...'
         sleep 1
     done
 
