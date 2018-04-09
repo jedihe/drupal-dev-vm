@@ -72,6 +72,7 @@ au BufNewFile,BufRead *.inc set filetype=php
 au BufNewFile,BufRead *.module set filetype=php
 au BufNewFile,BufRead *.install set filetype=php
 au BufNewFile,BufRead *.test set filetype=php
+au BufNewFile,BufRead *.profile set filetype=php
 
 "Added from "vim after 11 years" (http://statico.github.io/vim.html)
 
@@ -220,3 +221,5 @@ let g:tagcommands = {
 \     "php" : {"tagfile":".php.tags","args":"-R --langmap=php:.engine.inc.module.theme.install.php --php-kinds=cdfi"}
 \}
 "let g:taggatron_verbose = 1
+
+set omnifunc=phpcomplete#CompletePHP
