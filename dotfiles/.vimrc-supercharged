@@ -208,6 +208,7 @@ let g:tagbar_width = 55
 "Vdebug config
 :let g:vdebug_options = {}
 :let g:vdebug_options["watch_window_style"] = 'compact'
+:let g:vdebug_options["continuous_mode"] = 1
 
 "Powerline config
 set laststatus=2
@@ -218,8 +219,10 @@ let g:syntastic_php_phpcs_args = "--standard=Drupal"
 
 "Taggatron config
 let g:tagcommands = {
-\     "php" : {"cmd":"ctags","tagfile":".php.tags","args":"-R --langmap=php:.engine.inc.module.theme.install.php --php-kinds=cdfi"}
+\     "php" : {"cmd":"ctags","tagfile":".php.tags","args":"-R --fields=+laimS --languages=php --langmap=php:.engine.inc.module.theme.install.php --php-kinds=cdfi"}
 \}
 "let g:taggatron_verbose = 1
 
 set omnifunc=phpcomplete#CompletePHP
+let g:phpcomplete_enhance_jump_to_definition = 1
+let g:phpcomplete_parse_docblock_comments = 1
