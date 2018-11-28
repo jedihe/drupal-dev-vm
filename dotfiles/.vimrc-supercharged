@@ -192,6 +192,9 @@ au BufNewFile,BufRead *.profile set filetype=php
 :nmap <C-l> gt
 :nmap <C-h> gT
 
+" NERDTree config
+let NERDTreeNodeDelimiter = "\t"
+
 " Tagbar config
 nmap <F8> :TagbarToggle<CR>
 let g:tagbar_width = 55
