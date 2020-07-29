@@ -207,6 +207,11 @@ let g:tagbar_width = 55
 :let g:ctrlp_working_path_mode = 0
 :let g:ctrlp_dotfiles = 1
 :let g:ctrlp_switch_buffer = 0
+:let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.git|node_modules|build)$',
+  \ }
+:let g:ctrlp_max_files = 50000
+:let g:ctrlp_max_depth = 40
 
 "Vdebug config
 :let g:vdebug_options = {}
