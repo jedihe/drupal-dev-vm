@@ -227,7 +227,7 @@ let g:syntastic_php_phpcs_args = "--standard=Drupal"
 
 "Taggatron config
 let g:tagcommands = {
-\     "php" : {"cmd":"ctags","tagfile":".php.tags","args":"-R --fields=+laimS --languages=php --langmap=php:.engine.inc.module.theme.install.php --php-kinds=cdfi"}
+\     "php" : {"cmd":"ctags","tagfile":".php.tags","args":"-R --fields=+laimS --languages=php --langmap=php:.engine.inc.module.theme.install.php --php-kinds=cdfit"}
 \}
 "let g:taggatron_verbose = 1
 
